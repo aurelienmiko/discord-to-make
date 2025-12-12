@@ -14,7 +14,14 @@ client.once("ready", () => {
 });
 
 client.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
+  const ALLOWED_BOT_IDS = [
+  "1448705422499516519" // ID du bot VintedSeekers
+];
+
+if (message.author.bot && !ALLOWED_BOT_IDS.includes(message.author.id)) {
+  return;
+}
+
 
   await fetch(process.env.MAKE_WEBHOOK_URL, {
     method: "POST",
